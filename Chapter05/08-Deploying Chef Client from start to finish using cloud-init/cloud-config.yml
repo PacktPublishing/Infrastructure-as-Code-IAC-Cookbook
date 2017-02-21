@@ -1,0 +1,37 @@
+#cloud-config
+chef:
+  install_type: "omnibus"
+  force_install: true
+  omnibus_url: "https://www.getchef.com/chef/install.sh"
+  server_url: "https://api.chef.io/organizations/iacbook"
+  validation_name: "iacbook"
+  validation_cert: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEowIBAAKCAQEAuR/x0A96mYy6yaZJiWb+xqtl8ZkCA8EOdgHta+7KZU4K8Ws9
+    J/H0oSMmWPIVaDu13JSByedUJSUqzc0v4Xi3+rFBaFRlfuaKubut7958HdR4Vukm
+    F+izN34At24io5ktc8CyBYkYqF3U0lL5BS0CxPeIpKH6XoRVQD1qY5CXE/nGg/ke
+    AdhDjVIdlaHeumdna3pVyY3j6Qz6NQnAj0+1Lo5pmO2bebee4T7Jy7nuIrHr1nR2
+    nkHP4pORpJTOLZJ808/3B4OJg1M15YtbzrjA4F1tpb0H3ZSiXuc67aahhvM5UV5s
+    9N5gtRWK+ry+nfKpmIgWFoN/RZx1yMASkfcHqQIDAQABAoIBAA189Vpqdk1PwqBE
+    nGEFfxSskk3rDwmE/G++rjTJ/jcpW4TBgoAxkdhXvkiGwuaISzTaISa70xatwZOj
+    GpT7/bOnTJO0any3gW4M7ZxngnWN5IKslBjz3HLznEvBG4b99yDS7mWW2pQR2hrE
+    7t3grK37Nxp/rsVKMQfwMZs1grxyu7m3PdmepKNvAwT+SVm6acfo7PPuy68qmd+N
+    Rxu6m0vgDc/hVPqnmum6smx3yoQFHhgazSAcFEY6OPN/FNuDPwxvhie9Q50W7cMt
+    g+HdU05My3o5RkwIGERPy760thlGaMBPdLn8jb21ix/h6RwvqgMttsd5xCA4bA9e
+    21wdwwECgYEA20nTXfH+7J6/ND3fCl2yeyt+CBpXS0RREB/Bibv1OYG/HlVkmDRx
+    2vEvHIzD3JLHlqnpn54ijRwwDOk8rO1k7kQTt+xiYxLXTVKns3vkeDNJNjuGGBZ9
+    QCb+JxNPnSExRcK71m+G3r4EpYq51O7O2ihecEgAHbonY1zFJcmjyKECgYEA2B3y
+    8uTg/gnGMcXrILSk3YrzoCXsytOu8CIWX2jyoluDqdcEAe5V0ZdMu7ZmAzRB7fU4
+    Q5/SrndWUfnNF/GhPrzYrt/CBcU3ZkofRX7HyHW1bZAGVfJjqIlKfRFEsTEHfEjE
+    TuyjYlHRGzAoLIiofaJAYbVkrrGnWHNv0JVwugkCgYBIoq+MkrfqELssxsG2YUrZ
+    WZKphHAd0kc3nA0zXjrgDYYMuiRT9iswZmtAfa/yw/uwgB+Oa4buTsPrwuYCMbAb
+    knkllvsP7hG63wIFhagr2HELsbO9DtX2BfRxZQgd9/ymKtalNNPru+02GDltupxx
+    zqVZc7/2GM8rLnNvDNdfgQKBgQDXtUTZ5VMgnJbi9R4Tndp0eg1jCpeHdrPEYPGd
+    t31+SgNnkQIh/0ZPFUn0jkDR7+XiYgEPlkVN+DUDS2bHAFkl6o4INbRN2CPMiC0g
+    S0OTNNGqkreQL4gDH01m+cZraXmENokiEZWeO/WPwohGsvwhscG7BLeCmjVi1o2D
+    TrWeKQKBgGhma5sxbm6UZKvyukrDVRxPBFR7ZCJzpDeZ6wor4zCsKWm85WfTJ4R7
+    B9xFd3eW56biz2ktI9dwb1HecdJuxQdg3fXIJjwFO0xn8w0amW1ccixZ45Yo50Ld
+    mUclU5X1RztvVPD6pjfykoPNOhxOfwTFjAxJtojU6+mL+4gaoQXN
+    -----END RSA PRIVATE KEY-----
+  run_list:
+  - "recipe[starter]"

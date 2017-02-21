@@ -1,0 +1,6 @@
+#cloud-config
+# Install packages on first boot
+packages:
+  - tcpdump
+  - docker
+  - nmap

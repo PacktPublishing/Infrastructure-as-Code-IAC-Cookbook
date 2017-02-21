@@ -1,0 +1,18 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/centos-7.2"
+  config.omnibus.chef_version = :latest
+
+  config.vm.provision "chef_zero" do |chef|
+    chef.cookbooks_path = "cookbooks"
+    chef.environments_path = "environments"
+    chef.roles_path = "roles"
+    chef.nodes_path = "nodes"
+    chef.environment = "production"
+    chef.add_role "docker"
+  end
+
+  config.berkshelf.berksfile_path = "cookbooks/platform/Berksfile"
+  config.berkshelf.enabled = true
+end
+
+# Chef Client finished, 17/45 resources updated in 03 minutes 30 seconds

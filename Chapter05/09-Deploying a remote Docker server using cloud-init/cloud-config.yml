@@ -1,0 +1,35 @@
+#cloud-config
+hostname: "docker"
+users:
+  - name: "jane"
+    gecos: "Jane Docker"
+    groups:
+      - "docker"
+    ssh-authorized-keys:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEaIhhhfjKmCY48O6EQrtZr6qVM3dSjuf1EzOlkSqdgsLkk1PtUjNXVXCeKq6LgHv5MpJQVEFLbo+F4n8VN08gGWqKoSjxi13iRW9aqsqlLwLqb26Rsz8ur3Gckk+e6iD5ZVzLSv1E6Xlwhf2MvgRYSwmb8qppM44fJyDPSXkX2cTk0nVWksbKJI7c+kCB+ui2z3gaitqAxoiWDLmazPnjMTJLYof9Ituqu1IFSDr+SM4Y+9xgcic5mx1cZ+4wBKZP+3w5zOJf0YRgae7T+0CXl6mNTys6tE/2QmnTWFecAYj8vFqJSqlflDTzLDhk/Zb8knkNV0WWIKkWQbK0tmWl jane"
+coreos:
+  units:
+  - name: docker-tcp.socket
+    command: start
+    enable: true
+    content: |
+      [Unit]
+      Description=Docker Socket for the API
+
+      [Socket]
+      ListenStream=2375
+      BindIPv6Only=both
+      Service=docker.service
+
+      [Install]
+      WantedBy=sockets.target
+  - name: settimezone.service
+    command: start
+    content: |
+      [Unit]
+      Description=Setting the timezone
+
+      [Service]
+      ExecStart=/usr/bin/timedatectl set-timezone America/New_York
+      RemainAfterExit=yes
+      Type=oneshot

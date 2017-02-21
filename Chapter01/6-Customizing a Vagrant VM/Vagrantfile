@@ -1,0 +1,29 @@
+vm_memory = 1024
+vm_cpus = 2
+
+Vagrant.require_version ">= 1.8.0"
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "bento/centos-7.2"
+  config.vm.hostname = "vagrant-lab-1"
+  config.vm.box_check_update = false
+  config.vm.box_version = "2.2.9"
+  config.vm.post_up_message = "Use \"vagrant ssh\" to log into the box. This VM uses #{vm_cpus} CPUs and #{vm_memory}M of RAM."
+
+  if Vagrant.has_plugin?("vagrant-vbguest") then
+    config.vbguest.auto_update = false
+  end
+
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = vm_memory
+    vb.cpus = vm_cpus
+  end
+
+  ["vmware_fusion", "vmware_workstation"].each do |vmware|
+    config.vm.provider vmware do |v|
+      v.vmx["numvcpus"] = vm_cpus
+      v.vmx["memsize"] = vm_memory
+    end
+  end
+end

@@ -1,0 +1,10 @@
+---
+  - name: base security group
+    ec2_group:
+      name: base_security_group
+      description: Base Security Group
+      rules:
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: 1.2.3.4/32

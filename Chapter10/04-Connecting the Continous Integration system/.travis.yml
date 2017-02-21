@@ -1,0 +1,6 @@
+sudo: required
+language: ruby
+dist: trusty
+services:
+  - docker
+script: make test

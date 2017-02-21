@@ -1,0 +1,15 @@
+[Unit]
+Description=Tomcat Container Service
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=/usr/bin/docker pull tomcat:9
+ExecStartPre=-/usr/bin/docker kill %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStart=/usr/bin/docker run --rm -p 80:8080 --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=docker_logs --log-opt awslogs-stream=%n --name %n tomcat:9
+ExecStop=/usr/bin/docker stop %n
+
+[Install]
+WantedBy=multi-user.target

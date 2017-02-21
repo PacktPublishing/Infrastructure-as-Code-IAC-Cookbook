@@ -1,0 +1,4 @@
+:sources:
+  :my-repos:
+    remote: 'https://github.com/ppomes/r10k_sample.git'
+    basedir: 'puppetcode/environments'

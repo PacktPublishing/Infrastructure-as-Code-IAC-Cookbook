@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  http:
+    build: .
+    image: demo-httpd
+    ports:
+      - "80:80"

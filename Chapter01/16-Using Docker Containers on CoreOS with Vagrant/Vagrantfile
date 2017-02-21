@@ -1,0 +1,29 @@
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+db_root_password = "h4ckm3"
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "https://stable.release.core-os.net/amd64-usr/current/coreos_production_vagrant.box"
+  config.vm.box_check_update = false
+
+  # don't do anything with the virtualbox guest additions on CoreOS
+  config.vm.provider :virtualbox do |vb|
+      vb.check_guest_additions = false
+      vb.functional_vboxsf     = false
+  end
+
+  if Vagrant.has_plugin?("vagrant-vbguest") then
+    config.vbguest.auto_update = false
+  end
+
+  config.vm.define "core-1" do |config|
+    config.vm.hostname = "core-1"
+    config.vm.network "private_network", type: "dhcp"
+    config.vm.provision "docker" do |docker|
+      docker.run "mariadb",
+        args: "--name 'mariadb' -e 'MYSQL_ROOT_PASSWORD=#{db_root_password}'"
+      docker.run "wordpress",
+        args: "-e 'WORDPRESS_DB_HOST=mariadb' -e 'WORDPRESS_DB_PASSWORD=#{db_root_password}' --link 'mariadb:mariadb' -p '80:80'"
+    end
+  end
+end

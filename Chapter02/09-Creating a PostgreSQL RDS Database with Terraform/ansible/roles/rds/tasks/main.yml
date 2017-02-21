@@ -1,0 +1,15 @@
+---
+- name: create RDS PgSQL
+  rds:
+    command: create
+    instance_name: db
+    db_engine: postgres
+    engine_version: 9.5.2
+    db_name: iac_book_db
+    size: 5
+    instance_type: db.t2.micro
+    username: dbadmin
+    password: super_secure_password
+    publicly_accessible: yes
+    tags:
+      Name: IAC Database

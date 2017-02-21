@@ -1,0 +1,12 @@
+#cloud-config
+write_files:
+  - path: /etc/motd
+    content: |
+      This server is configured using cloud-init.
+      Welcome.
+    owner: root:root
+    permissions: '0644'
+  - path: /etc/server-id
+    content: YWJjLTEyMwo=
+    encoding: b64
+    permissions: '0600'

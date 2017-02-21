@@ -1,0 +1,15 @@
+[Unit]
+Description=Node App
+After=network.target
+
+[Service]
+ExecStart=/srv/nodeapp/app.js
+Restart=always
+User=vagrant
+Group=vagrant
+Environment=PATH=/usr/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/srv/nodeapp
+
+[Install]
+WantedBy=multi-user.target

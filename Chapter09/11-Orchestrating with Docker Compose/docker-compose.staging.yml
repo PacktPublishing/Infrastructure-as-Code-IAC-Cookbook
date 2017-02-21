@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  wordpress:
+    image: wordpress:4.6
+    environment:
+      WORDPRESS_DB_PASSWORD: s3cur3
+  mysql:
+    environment:
+      MYSQL_ROOT_PASSWORD: s3cur3

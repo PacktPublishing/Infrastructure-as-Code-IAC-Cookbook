@@ -1,0 +1,28 @@
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+
+vm_memory = 512
+vm_cpus = 1
+vm_num = 2
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "bento/centos-7.2"
+  config.vm.box_check_update = false
+
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = vm_memory
+    vb.cpus = vm_cpus
+    vb.linked_clone = true
+  end
+
+  (1..vm_num).each do |n|
+    # a lan lab in the 192.168.50.0/24 range
+    lan_ip = "192.168.50.#{n+10}"
+    config.vm.define "srv-#{n}" do |config|
+      config.vm.provision :shell, :inline => "ip addr | grep \"inet\" | awk '{print $2}'"
+      config.vm.network "private_network", ip: lan_ip, virtualbox__intnet: "true"
+      # uncomment if using "iac-lab", a named VirtualBox NAT Network
+      # config.vm.network "private_network", ip: lan_ip, virtualbox__intnet: "iac-lab"
+    end
+  end
+
+end

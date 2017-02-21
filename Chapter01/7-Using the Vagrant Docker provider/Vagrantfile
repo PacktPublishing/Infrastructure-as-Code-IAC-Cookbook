@@ -1,0 +1,18 @@
+Vagrant.require_version ">= 1.8.0"
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+
+Vagrant.configure("2") do |config|
+
+  config.vm.hostname = "vagrant-docker-1"
+  config.vm.post_up_message = "HTTP access: http://localhost/"
+
+  config.vm.define "front" do |front|
+    front.vm.provider "docker" do |docker|
+      docker.image = "nginx:stable"
+      docker.ports = ['80:80']
+      # On SE Linux systems: sudo setenforce 0
+      docker.volumes = ["#{Dir.pwd}/src:/usr/share/nginx/html"]
+    end
+  end
+
+end

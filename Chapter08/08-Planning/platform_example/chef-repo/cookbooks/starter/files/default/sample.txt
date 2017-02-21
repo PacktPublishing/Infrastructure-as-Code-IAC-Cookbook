@@ -1,0 +1,16 @@
+This is a Chef cookbook file. It is used to copy content verbatim on to a server.
+For dynamic or otherwise data-driven content, please see sample.erb in the templates/
+directory for an example of using a template resource.
+
+You can create a cookbook_file resource in a recipe file:
+
+    cookbook_file "/etc/myserver.conf" do
+      source "sample.txt"
+      owner "root"
+      group "root"
+      mode "644"
+    end
+
+A cookbook_file resource can be used with any context, including binary files.
+
+For further information, see the Chef documentation (https://docs.chef.io/essentials_cookbook_files.html).

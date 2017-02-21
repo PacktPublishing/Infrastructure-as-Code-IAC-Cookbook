@@ -1,0 +1,5 @@
+FROM alpine:latest
+RUN apk --update --no-cache add ca-certificates openssl && \
+    rm -rf /var/cache/apk/*
+COPY src/hello/hello /bin/hello
+ENTRYPOINT ["/bin/hello"]

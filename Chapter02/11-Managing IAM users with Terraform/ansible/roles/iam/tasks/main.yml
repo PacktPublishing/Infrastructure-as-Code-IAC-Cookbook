@@ -1,0 +1,29 @@
+---
+- name: create mary user
+  iam:
+    iam_type: user
+    name: mary
+    state: present
+    access_key_state: create
+    path: /team/
+- name: create joe user
+  iam:
+    iam_type: user
+    name: joe
+    state: present
+    access_key_state: create
+    path: /team/
+- name: create logs user
+  iam:
+    iam_type: user
+    name: logs
+    state: present
+    access_key_state: create
+    path: /apps/
+- name: Assign a AmazonS3FullAccess policy to mary
+  iam_policy:
+    iam_type: user
+    iam_name: mary
+    policy_name: AmazonS3FullAccess
+    state: present
+    policy_document: AmazonS3FullAccess.json

@@ -1,0 +1,4 @@
+# IAC Book root keys
+export AWS_ACCESS_KEY_ID="ABCDE"
+export AWS_SECRET_ACCESS_KEY="zxcvbn12345"
+export AWS_DEFAULT_REGION="eu-west-1"

@@ -1,0 +1,16 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-7.2
+
+suites:
+  - name: default
+    data_bags_path: "../../data_bags"
+    run_list:
+      - recipe[mysite::default]
+    attributes:

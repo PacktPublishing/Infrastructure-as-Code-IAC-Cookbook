@@ -1,0 +1,9 @@
+source 'https://supermarket.chef.io'
+
+metadata
+
+cookbook 'apache', path: '../apache'
+cookbook 'php', path: '../php'
+cookbook 'mysql', '8.0.4'
+cookbook 'selinux'
+cookbook 'yum-mysql-community', '~> 1.0.0'

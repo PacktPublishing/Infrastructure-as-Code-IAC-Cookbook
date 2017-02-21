@@ -1,0 +1,10 @@
+#cloud-config
+groups:
+  - infosec: [emergency]
+users:
+  - name: emergency
+    groups: sudo
+    shell: /bin/sh
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+fAfzjw5+mUZ7nGokB0tzO9fOLKrjHGVlabpRUxvsIN/dRRmiBA9NDh5YRZ/ThAhn+RvPKGTBrXmuv3qWd/iWc3nie0fc2zDX1/Dc8EAIF9ybXfSxT2DXOWWLOvNdUVOZNifmsmCQ1z0p9hg3bo65c0ZEBpXHIk+l75uFWAIYZ/4jnXyFWz1ptmQR7gnAk2KBK19sj1Ii0pNjGyVbl5bNitWb3ulaviIT3FCswZoOsYvcLpOwQrMA3k12kEAb30CYpesGcq6WDHAZSpWkFvc3Cd/AET4/SjtyYpQVEhUn84v106WbNeDyJpUX6cz2WG2UaEqZc0VqZVhI63jG7wUR emergency@host

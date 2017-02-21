@@ -1,0 +1,6 @@
+---
+  - name: ec2 admin key
+    ec2_key:
+      name: admin_key
+      key_material: "{{ item }}"
+    with_file: './keys/aws_terraform.pub'

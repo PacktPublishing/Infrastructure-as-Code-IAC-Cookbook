@@ -1,0 +1,9 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/centos-7.2"
+  ["vmware_fusion", "vmware_workstation"].each do |vmware|
+    config.vm.provider vmware do |v|
+      v.vmx["numvcpus"] = "2"
+      v.vmx["memsize"] = "1024"
+    end
+  end
+end

@@ -1,0 +1,10 @@
+#cloud-config
+package_upgrade: true
+apt_reboot_if_required: true
+apt_sources:
+  - source: "ppa:nginx/stable"
+packages:
+  - htop
+  - nmap
+  - curl
+  - wget

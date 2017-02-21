@@ -1,0 +1,9 @@
+#cloud-config
+bootcmd:
+  - echo bootcmd started at $(date)
+  - echo $INSTANCE_ID > /etc/instance_id
+  - cloud-init-per instance mkfs-xvdb mkfs -t ext4 /dev/xvdb
+mounts:
+ - [ /dev/xvdb, /srv/www ]
+runcmd:
+ - 'echo runcmd started at $(date)'

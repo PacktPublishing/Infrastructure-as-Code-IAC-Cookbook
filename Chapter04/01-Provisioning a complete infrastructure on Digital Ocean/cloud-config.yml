@@ -1,0 +1,18 @@
+#cloud-config
+# https://coreos.com/validate/
+# curl -w "\n" 'https://discovery.etcd.io/new?size=3'
+coreos:
+  etcd2:
+    discovery: "https://discovery.etcd.io/fb731b9199e7b5816060abc995977deb"
+    advertise-client-urls: "http://$private_ipv4:2379"
+    initial-advertise-peer-urls: "http://$private_ipv4:2380"
+    listen-client-urls: http://0.0.0.0:2379
+    listen-peer-urls: http://$private_ipv4:2380
+  units:
+    - name: etcd2.service
+      command: start
+    - name: fleet.service
+      command: start
+  fleet:
+    public-ip: "$public_ipv4"
+    metadata: "region=ams,provider=digitalocean"

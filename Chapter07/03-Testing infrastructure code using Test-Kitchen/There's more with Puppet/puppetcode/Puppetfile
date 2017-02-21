@@ -1,0 +1,11 @@
+forge 'http://forge.puppetlabs.com'
+
+# Local modules
+mod 'apache', :local =>true
+mod 'php', :local =>true
+mod 'mariadb', :local =>true
+
+# Modules discovered by generate-puppetfile
+mod 'puppet/staging', '2.1.0'
+mod 'puppetlabs/mysql', '3.10.0'
+mod 'puppetlabs/stdlib', '4.15.0'

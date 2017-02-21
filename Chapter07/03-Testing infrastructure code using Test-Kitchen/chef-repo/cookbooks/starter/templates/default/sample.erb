@@ -1,0 +1,27 @@
+This is a sample Chef template. It uses the Erubis templating language to insert
+dynamic content into text files. For surely static content, including non-text
+files, please see sample.txt in the files/ directory for an example of using a
+cookbook_file resource.
+
+You can create a template resource in a recipe file:
+
+    template "/etc/myserver.conf" do
+      source "sample.erb"
+      owner "root"
+      group "root"
+      mode "644"
+      variables :hostname => node["fqdn"], :servers => ["alpha", "bravo", "charlie"]
+    end
+
+You can insert the value of a template variable by using "<%=  %>", such as:
+
+    name = <%= @hostname %>
+
+You can also use Ruby loops and conditionals via "<%  %>", such as:
+
+    <% @servers.each do |name| %>
+    ServerAlias <%= name %>;
+    <% end %>
+
+For further information, see the Chef documentation (https://docs.chef.io/essentials_cookbook_templates.html)
+and the Erubis User Guide (http://www.kuwata-lab.com/erubis/users-guide.html).

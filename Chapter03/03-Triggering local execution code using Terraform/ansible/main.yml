@@ -1,0 +1,10 @@
+---
+- hosts: centos7_hosts
+  become: yes
+  tasks:
+    - name: Install EPEL
+      yum: name=epel-release state=present
+    - name: Install Docker
+      yum: name=docker state=present
+    - name: Start docker
+      service: name=docker state=started enabled=yes

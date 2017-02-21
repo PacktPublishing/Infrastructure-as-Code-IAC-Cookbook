@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Enable EPEL
+      yum: name=epel-release state=present
+    - name: Create a Docker group
+      group: name=docker state=present
+    - name: Add the vagrant user to Docker group
+      user: name=vagrant groups=docker append=yes
+    - name: Install Docker
+      yum: name=docker state=present
+    - name: Enable and Start Docker Daemon
+      service: name=docker state=started enabled=yes

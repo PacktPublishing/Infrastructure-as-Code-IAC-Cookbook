@@ -1,0 +1,5 @@
+source 'https://supermarket.chef.io'
+
+metadata
+
+cookbook 'chef-client', '~> 7.0.0'

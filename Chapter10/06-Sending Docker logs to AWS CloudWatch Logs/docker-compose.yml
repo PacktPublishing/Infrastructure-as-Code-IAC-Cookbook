@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  tomcat:
+    image: tomcat:9
+    logging:
+      driver: 'awslogs'
+      options:
+        awslogs-region: 'us-east-1'
+        awslogs-group: 'docker_logs'
+        awslogs-stream: 'tomcat'

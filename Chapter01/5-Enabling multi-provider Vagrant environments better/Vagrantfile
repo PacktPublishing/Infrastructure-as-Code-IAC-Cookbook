@@ -1,0 +1,20 @@
+
+vm_memory = 1024
+vm_cpus = 2
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "bento/centos-7.2"
+
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = vm_memory
+    vb.cpus = vm_cpus
+  end
+
+  ["vmware_fusion", "vmware_workstation"].each do |vmware|
+    config.vm.provider vmware do |v|
+      v.vmx["numvcpus"] = vm_cpus
+      v.vmx["memsize"] = vm_memory
+    end
+  end
+end

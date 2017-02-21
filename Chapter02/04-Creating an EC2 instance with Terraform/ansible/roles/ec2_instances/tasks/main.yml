@@ -1,0 +1,8 @@
+---
+  - name: dev instance
+    ec2:
+      key_name: admin_key
+      group: base_security_group
+      instance_type: t2.micro
+      image: ami-ee6b189d
+      wait: yes

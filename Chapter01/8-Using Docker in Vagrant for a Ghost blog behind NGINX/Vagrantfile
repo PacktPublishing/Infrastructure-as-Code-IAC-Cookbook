@@ -1,0 +1,26 @@
+Vagrant.require_version ">= 1.8.0"
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+ENV['VAGRANT_NO_PARALLEL'] = 'true'
+
+Vagrant.configure("2") do |config|
+
+  config.vm.hostname = "vagrant-docker-1"
+  config.vm.post_up_message = "HTTP access: http://localhost/"
+
+  config.vm.define "app" do |app|
+    app.vm.provider "docker" do |docker|
+      docker.name = "app"
+      docker.image = "ghost:0.9.0"
+    end
+  end
+
+  config.vm.define "front" do |front|
+    front.vm.provider "docker" do |docker|
+      docker.image = "nginx:stable"
+      docker.ports = ['80:80']
+      docker.volumes = ["#{Dir.pwd}/nginx.conf:/etc/nginx/conf.d/default.conf"]
+      docker.link("app:app")
+    end
+  end
+
+end

@@ -1,0 +1,53 @@
+Vagrant.configure('2') do |config|
+  config.vm.define 'webserver', autostart: false do |ws|
+    ws.vm.box = 'bento/centos-7.2'
+
+    ws.vm.provision :chef_zero do |chef|
+      chef.cookbooks_path = 'cookbooks'
+      chef.environments_path = 'environments'
+      chef.roles_path = 'roles'
+      chef.nodes_path = 'nodes'
+      chef.environment = 'production'
+      chef.add_role 'webserver'
+    end
+
+    ws.berkshelf.berksfile_path = 'cookbooks/apache/Berksfile'
+    ws.berkshelf.enabled = true
+  end
+  # Chef Client finished, 3/3 resources updated in 10 seconds
+
+  config.vm.define 'db', autostart: false do |db|
+    db.vm.box = 'bento/centos-7.2'
+
+    db.vm.provision :chef_zero do |chef|
+      chef.cookbooks_path = 'cookbooks'
+      chef.environments_path = 'environments'
+      chef.roles_path = 'roles'
+      chef.nodes_path = 'nodes'
+      chef.environment = 'production'
+      chef.add_recipe 'mysite::mysql'
+    end
+
+    db.berkshelf.berksfile_path = 'cookbooks/mysite/Berksfile'
+    db.berkshelf.enabled = true
+  end
+  # Chef Client finished, 29/43 resources updated in 01 minutes 28 seconds
+
+  config.vm.define 'mysite', autostart: false do |mysite|
+    mysite.vm.box = 'bento/centos-7.2'
+
+    mysite.vm.provision :chef_zero do |chef|
+      chef.cookbooks_path = 'cookbooks'
+      chef.environments_path = 'environments'
+      chef.data_bags_path = 'data_bags_encrypted'
+      chef.roles_path = 'roles'
+      chef.nodes_path = 'nodes'
+      chef.environment = 'production'
+      chef.add_recipe 'mysite::default'
+    end
+
+    mysite.berkshelf.berksfile_path = 'cookbooks/mysite/Berksfile'
+    mysite.berkshelf.enabled = true
+  end
+
+end

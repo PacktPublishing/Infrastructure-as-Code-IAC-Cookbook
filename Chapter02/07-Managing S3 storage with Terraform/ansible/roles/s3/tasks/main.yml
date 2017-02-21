@@ -1,0 +1,13 @@
+---
+- name: create iac-book bucket
+  s3:
+    bucket: iac-book
+    mode: create
+    permission: public-read
+- name: create index.html file
+  s3:
+    bucket: iac-book
+    object: index.html
+    src: index.html
+    mode: put
+    permission: public-read

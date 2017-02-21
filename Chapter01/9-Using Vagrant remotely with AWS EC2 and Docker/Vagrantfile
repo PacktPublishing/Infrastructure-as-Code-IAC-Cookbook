@@ -1,0 +1,35 @@
+ENV['AWS_ACCESS_KEY_ID'] = 'ABCDE123'
+ENV['AWS_SECRET_ACCESS_KEY'] = 'qwertyu12345'
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'aws'
+
+Vagrant.configure("2") do |config|
+
+  config.vm.provider :aws do |aws, override|
+    aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
+    aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+
+    aws.region = "eu-west-1"
+    aws.availability_zone = "eu-west-1a"
+
+    aws.instance_type = "t2.micro"
+
+    aws.security_groups = ['iac-lab']
+
+    aws.keypair_name = "iac-lab"
+    override.ssh.username = "ubuntu"
+    override.ssh.private_key_path = "./keys/iac-lab.pem"
+
+    override.nfs.functional = false
+    aws.tags = {
+      'Name'   => 'Vagrant'
+    }
+    override.vm.box = "dummy"
+  end
+
+  config.vm.define "srv-1" do |config|
+    config.vm.provider :aws do |aws|
+      aws.ami = "ami-c06b1eb3"
+    end
+    config.vm.provision :shell, :path => "script.sh"
+  end
+end

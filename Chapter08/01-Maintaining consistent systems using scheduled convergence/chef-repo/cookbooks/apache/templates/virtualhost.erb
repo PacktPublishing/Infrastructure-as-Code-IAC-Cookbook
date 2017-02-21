@@ -1,0 +1,12 @@
+<VirtualHost 192.168.146.129:80>
+        ServerName <%= @website %>
+        DocumentRoot /var/www/<%= @website %>
+        ErrorLog /var/log/httpd/error-<%= @website %>.log
+        CustomLog /var/log/httpd/access-<%= @website %>.log combined
+        <Directory /var/www/<%= @website %>/ >
+          Options Indexes FollowSymLinks MultiViews
+          AllowOverride All
+          Order allow,deny
+          allow from all
+        </Directory>
+</VirtualHost>

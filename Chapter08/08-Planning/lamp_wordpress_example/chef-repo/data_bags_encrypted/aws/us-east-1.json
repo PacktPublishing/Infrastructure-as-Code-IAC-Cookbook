@@ -1,0 +1,15 @@
+{
+  "id": "us-east-1",
+  "aws_access_key": {
+    "encrypted_data": "RwbfsWgKk16sSCkMD38tXKGHmT1AHFGHRm/7fyzppye7wSS0kk19Zml0VuhQ\nXxxI\n",
+    "iv": "iRRgrKfz6Ou2qdpYLkUA+w==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "aws_secret_key": {
+    "encrypted_data": "uSppKMYrRbEYn/njDYo3CIGC5tY+pptN1Z7LiARtNIU/zsllBNdSVENC1XwX\nQksifE6g00sdcHTGlHlVU0WJ0Q==\n",
+    "iv": "ppjeAJcegZ9Yyn9rXgHRBQ==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}

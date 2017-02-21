@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  wordpress:
+    image: wordpress:4.5
+    environment:
+      WORDPRESS_DB_PASSWORD: sup3rs3cur3
+      VIRTUAL_HOST: localhost
+  mysql:
+    environment:
+      MYSQL_ROOT_PASSWORD: sup3rs3cur3

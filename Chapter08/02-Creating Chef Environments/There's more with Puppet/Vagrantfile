@@ -1,0 +1,38 @@
+vm_memory = 2048
+vm_cpus = 2
+
+unless Vagrant.has_plugin?("vagrant-hostmanager")
+  raise 'vagrant-hostmanager is not installed!'
+end 
+
+Vagrant.configure("2") do |config|
+
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_guest = true
+    config.hostmanager.manage_host = true
+
+    config.vm.define "puppet.pomes.pro" do |puppet|
+        puppet.vm.box="bento/ubuntu-16.04"
+        puppet.vm.hostname="puppet.pomes.pro"
+
+        puppet.vm.provider :virtualbox do |vb|
+                vb.memory = vm_memory
+                vb.cpus = vm_cpus
+        end
+
+        puppet.vm.network :private_network, ip: "192.168.50.10"
+        puppet.hostmanager.aliases = %w(puppet)
+        puppet.vm.provision :shell, :path => "puppet_master.sh"
+
+        puppet.vm.synced_folder "puppetcode", "/etc/puppetlabs/code/"
+    end
+
+    config.vm.define "web.pomes.pro" do |web|
+        web.vm.box="bento/ubuntu-16.04"
+        web.vm.hostname="web.pomes.pro"
+
+        web.vm.network :private_network, ip: "192.168.50.11"
+
+        web.vm.provision :shell, :path => "puppet_node.sh"
+    end
+end

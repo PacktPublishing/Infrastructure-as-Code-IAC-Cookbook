@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  roles:
+  - ec2_keys
+  - ec2_securitygroups
+  - ec2_instances

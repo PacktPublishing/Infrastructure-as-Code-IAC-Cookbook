@@ -1,0 +1,3 @@
+FROM scratch
+COPY src/hello/hello /hello
+ENTRYPOINT ["/hello"]
